@@ -1,0 +1,9 @@
+# Jsx generated scripts
+js/dashboard/*
+!js/dashboard/**/*.jsx
+
+# NaCl Modules
+nacl/*
+!nacl/**/Makefile
+!nacl/**/*.nmf
+!nacl/**/*.cpp

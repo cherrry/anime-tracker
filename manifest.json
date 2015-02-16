@@ -1,0 +1,11 @@
+{
+    "manifest_version": 2,
+    "name": "Anime Tracker",
+    "description": "Track latest episode of various animes.",
+    "version": "0.0.1",
+    "options_page": "/options.html",
+    "permissions": [
+        "http://share.dmhy.org/topics/rss/*",
+        "https://share.dmhy.org/topics/rss/"
+    ]
+}
