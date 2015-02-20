@@ -4,13 +4,25 @@ body {
   padding: 2em;
 }
 
+a:hover {
+    cursor: pointer;
+}
+
 .anime-container {
   max-width: 1280px;
   margin: 0 auto;
 }
 
+.anime-more {
+    padding: 6px !important;
+}
+
 .anime-name {
     z-index: 1001;
+}
+
+.datetime{
+    cursor: help;
 }
 
 .episode-download {
