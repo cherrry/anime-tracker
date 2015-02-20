@@ -37,7 +37,7 @@ var AnimeTracker = (function () {
         var rss_data = AnimeTracker.animesRss[anime_name];
         _get_latest_episodes(rss_data, 4, callback);
     }
-    
+
     function _retrieve_all (anime_name, callback) {
         var rss_data = AnimeTracker.animesRss[anime_name];
         _get_latest_episodes(rss_data, 1000, callback);
@@ -113,3 +113,5 @@ var AnimeTracker = (function () {
     }
 
 })();
+
+module.exports = AnimeTracker;

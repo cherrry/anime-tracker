@@ -1,0 +1,13 @@
+{
+    "name": "anime-tracker",
+    "description": "Track latest episode of various animes.",
+    "isPrivate": true,
+    "devDependencies": {
+        "reactify": "~>1.0.0"
+    },
+    "browserify": {
+        "transform": [
+            [ "reactify" ]
+        ]
+    }
+}

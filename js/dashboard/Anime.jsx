@@ -1,3 +1,9 @@
+"use strict";
+
+var AnimeTracker = require("./../AnimeTracker.js");
+var Episode = require("./Episode.jsx");
+var TableRowFiller = require("./TableRowFiller.jsx");
+
 var Anime = React.createClass({
     getInitialState: function () {
         return {
@@ -26,10 +32,9 @@ var Anime = React.createClass({
     },
     render: function () {
         var self = this;
-        var isReadyToDownload = this.props.isReadyToDownload;
         var Episodes = this.state.episodes.map(function (episode) {
             var key = self.props.name + '-episode-' + episode.episode;
-            return <Episode name={ self.props.name } episode={ episode } key={ key } isReadyToDownload={ isReadyToDownload } />
+            return <Episode name={ self.props.name } episode={ episode } key={ key } />
         });
 
         for (var i = Episodes.length; i < 4; i++) {
@@ -80,3 +85,5 @@ var Anime = React.createClass({
         );
     }
 });
+
+module.exports = Anime;

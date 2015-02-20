@@ -1,4 +1,4 @@
-# anime-torrent
+# anime-tracker
 
 Chrome extension to track latest anime from torrent source.
 
@@ -6,18 +6,19 @@ Chrome extension to track latest anime from torrent source.
 
 ### Prerequisites
 
-1. NaCl SDK  
-https://developer.chrome.com/native-client/sdk/download
+1. Browserify ([http://browserify.org/]())  
+`npm install -g browserify`
 
-2. Jsx Compiler
-`npm install -g jsx`
+2. Node dependencies  
+`npm install`
 
 ### Build command
 
-1. Build react components  
-Foreach `js/dashboard/*.jsx`, run `jsx filename.jsx > filename.js`.
+1. Build `js/dashboard.js`  
+`browserify js/dashboard.js > js/dashboard.out.js`
 
-2. Build NaCl module in `nacl/` with `make`.
+2. Build `background/torrent.js`  
+`browserify background/torrent.js > background/torrent.out.js`
 
 ### Local Deployment
 
@@ -31,11 +32,11 @@ Foreach `js/dashboard/*.jsx`, run `jsx filename.jsx > filename.js`.
 
 5. Ta-da!
 
-## Todo
+## Todos
 
 ### Problems to Solve
 
-1. Download torrent with NaCl.
+1. Download torrent inside extension.
 
 ### Features
 
@@ -47,8 +48,4 @@ Foreach `js/dashboard/*.jsx`, run `jsx filename.jsx > filename.js`.
 
 ### Developement
 
-1. `gulp` task for compiling `.jsx` files automatically.
-
-2. Auto build NaCl module when code change.
-
-3. Try to use browserify to avoid global varaibles in Js.
+1. Run `browserify` when code changes.

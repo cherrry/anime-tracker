@@ -3,9 +3,14 @@
     "name": "Anime Tracker",
     "description": "Track latest episode of various animes.",
     "version": "0.0.1",
-    "options_page": "/options.html",
+    "options_page": "/dashboard.html",
     "permissions": [
-        "http://share.dmhy.org/topics/rss/*",
-        "https://share.dmhy.org/topics/rss/"
-    ]
+        "http://*/",
+        "https://*/"
+    ],
+    "background": {
+        "scripts": [
+            "/background/torrent.out.js"
+        ]
+    }
 }

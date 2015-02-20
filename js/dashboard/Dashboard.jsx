@@ -1,9 +1,8 @@
+"use strict";
+
+var AnimeList = require("./AnimeList.jsx");
+
 var Dashboard = React.createClass({
-    getInitialState: function () {
-        return {
-            isReadyToDownload: false
-        };
-    },
     render: function () {
         var trackingAnimes = [
             "Pokemon XY",
@@ -13,8 +12,10 @@ var Dashboard = React.createClass({
         ];
         return (
             <div>
-                <AnimeList animes={ trackingAnimes } isReadyToDownload={ this.props.isReadyToDownload } />
+                <AnimeList animes={ trackingAnimes } />
             </div>
         );
     }
 });
+
+module.exports = Dashboard;

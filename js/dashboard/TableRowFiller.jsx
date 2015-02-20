@@ -1,3 +1,5 @@
+"use strict";
+
 var TableRowFiller = React.createClass({
     render: function () {
         return (
@@ -7,3 +9,5 @@ var TableRowFiller = React.createClass({
         );
     }
 });
+
+module.exports = TableRowFiller;
