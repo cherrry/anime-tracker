@@ -6,16 +6,16 @@ Chrome extension to track latest anime from torrent source.
 
 ### Prerequisites
 
-1. Browserify ([http://browserify.org/]())  
-`npm install -g browserify`
+1. Global Gulp  
+`npm install -g gulp`
 
 2. Node dependencies  
 `npm install`
 
 ### Build command
 
-1. Build `js/dashboard.js`  
-`browserify js/dashboard.js > js/dashboard.out.js`
+1. Build `js/dashboard.min.js`  
+`gulp`
 
 2. Build `background/torrent.js`  
 `browserify background/torrent.js > background/torrent.out.js`
@@ -28,7 +28,7 @@ Chrome extension to track latest anime from torrent source.
 
 3. Load this folder.
 
-4. Go to "Option" page, and change `option` to `dashboard`.
+4. Go to "Option" page.
 
 5. Ta-da!
 
@@ -48,4 +48,4 @@ Chrome extension to track latest anime from torrent source.
 
 ### Developement
 
-1. Run `browserify` when code changes.
+1. Run `browserify` when background code changes.

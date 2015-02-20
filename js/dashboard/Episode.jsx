@@ -18,7 +18,7 @@ var Episode = React.createClass({
         if (moment(episode.publish).isAfter(moment().subtract(7, 'day'))) {
             additionalStyle = " warning"
         }
-        
+
         return (
             <tr className={ "episode" + additionalStyle }>
                 <td className="left aligned">
