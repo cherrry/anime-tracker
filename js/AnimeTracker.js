@@ -1,5 +1,7 @@
 "use strict";
 
+var moment = require("moment");
+
 var AnimeTracker = (function () {
     var _get_episode_regex = /第([\d-]+)話/;
 

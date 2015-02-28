@@ -10,7 +10,7 @@
     ],
     "background": {
         "scripts": [
-            "/background/torrent.out.js"
+            "/js/service.js"
         ]
     }
 }

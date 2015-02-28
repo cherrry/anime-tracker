@@ -1,5 +1,8 @@
 "use strict";
 
+var React = require("react");
+var moment = require("moment");
+
 var Episode = React.createClass({
     _download: function (event) {
         var magnet = this.props.episode.magnet;

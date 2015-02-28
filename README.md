@@ -14,11 +14,8 @@ Chrome extension to track latest anime from torrent source.
 
 ### Build command
 
-1. Build `js/dashboard.min.js`  
+1. Build everything  
 `gulp`
-
-2. Build `background/torrent.js`  
-`browserify background/torrent.js > background/torrent.out.js`
 
 ### Local Deployment
 
@@ -26,7 +23,7 @@ Chrome extension to track latest anime from torrent source.
 
 2. Choose "Developer Mode" and "Load Unpacked Extension".
 
-3. Load this folder.
+3. Load `anime-tracker/build`
 
 4. Go to "Option" page.
 
@@ -45,7 +42,3 @@ Chrome extension to track latest anime from torrent source.
 2. Remember which anime has been watched.
 
 3. Use 1 request to fetch latest animes.
-
-### Developement
-
-1. Run `browserify` when background code changes.

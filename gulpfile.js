@@ -1,29 +1,74 @@
 "use strict";
 
-var gulp = require("gulp");
-var gutil = require("gulp-util");
-var browserify = require("browserify");
-var source = require("vinyl-source-stream");
 var buffer = require("vinyl-buffer");
-var uglify = require("gulp-uglify");
+var browserify = require("browserify");
+var gulp = require("gulp");
+var source = require("vinyl-source-stream");
 var sourcemaps = require("gulp-sourcemaps");
+var uglify = require("gulp-uglify");
 var watchify = require("watchify");
-var rename = require("gulp-rename");
+var watch = require("gulp-watch");
 
-var dashboard = watchify(browserify("./js/dashboard.js", watchify.args));
-dashboard.transform("reactify");
-dashboard.transform("brfs");
+var copy_list = [
+    "./css/**/*",
+    "./dashboard.html",
+    "./manifest.json"
+];
 
-gulp.task("default", bundle);
-dashboard.on("update", bundle);
+var js_tasks = {
+    "js/dashboard": {
+        source: "./dashboard.js",
+        basedir: "./js",
+        output: "./js/dashboard.js"
+    },
+    "js/service": {
+        source: "./service.js",
+        basedir: "./js",
+        output: "./js/service.js"
+    }
+};
 
-function bundle() {
-    return dashboard.bundle()
-        .on("error", gutil.log.bind(gutil, 'Browserify Error'))
-        .pipe(source("./js/dashboard.min.js"))
-        .pipe(buffer())
-        .pipe(sourcemaps.init({ loadMaps: true }))
-        .pipe(uglify())
-        .pipe(sourcemaps.write("./"))
-        .pipe(gulp.dest("./"));
+gulp.task("default", [ "js", "copy", "watch" ], function () {});
+
+// js bundle task
+gulp.task("js", Object.keys(js_tasks));
+for (var task_name in js_tasks) {
+    gulp.task(task_name, bundle(task_name));
+}
+
+gulp.task("copy", function () {
+    return gulp.src(copy_list, { base: "./" })
+        .pipe(gulp.dest("./build"));
+});
+
+// watcher
+gulp.task("watch", function () {
+    return watch(copy_list, function () {
+        gulp.start("copy");
+    });
+});
+
+function bundle(task_name) {
+    var task_def = js_tasks[task_name];
+    var bundler = watchify(browserify(task_def.source, {
+        basedir: task_def.basedir,
+        cache: {},
+        debug: true,
+        fullPaths: true,
+        packageCache: {}
+    }));
+
+    bundler.on("update", function () {
+        gulp.start(task_name);
+    });
+
+    return function() {
+        bundler.bundle()
+            .pipe(source(task_def.output))
+            .pipe(buffer())
+            .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(uglify())
+            .pipe(sourcemaps.write("./"))
+            .pipe(gulp.dest("./build"));
+    };
 }

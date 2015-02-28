@@ -1,5 +1,7 @@
 "use strict";
 
+var React = require("react");
+
 var Anime = require("./Anime.jsx");
 
 var AnimeList = React.createClass({

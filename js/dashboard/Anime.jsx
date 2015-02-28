@@ -1,5 +1,7 @@
 "use strict";
 
+var React = require("react");
+
 var AnimeTracker = require("./../AnimeTracker.js");
 var Episode = require("./Episode.jsx");
 var TableRowFiller = require("./TableRowFiller.jsx");
@@ -53,7 +55,7 @@ var Anime = React.createClass({
                 </div>
             );
         }
-        
+
         var dimmer = null;
         if (!this.state.is_loaded) {
             dimmer = <tbody className="ui active inverted dimmer anime-dimmer"></tbody>;
@@ -63,7 +65,7 @@ var Anime = React.createClass({
                 </div>
             );
         }
-        
+
         var floating = null;
         if ( this.state.episodes.length > 0 )
         {

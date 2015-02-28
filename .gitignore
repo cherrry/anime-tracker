@@ -1,6 +1,5 @@
 # node modules
 node_modules
 
-# minified js
-js/**/*.min.js
-js/**/*.min.js.map
+# build
+build
