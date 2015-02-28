@@ -6,11 +6,14 @@ Chrome extension to track latest anime from torrent source.
 
 ### Prerequisites
 
-1. Global Gulp  
-`npm install -g gulp`
+1. Global dependencies
+`npm install -g gulp bower`
 
 2. Node dependencies  
 `npm install`
+
+3. Bower dependencies
+`bower install`
 
 ### Build command
 
