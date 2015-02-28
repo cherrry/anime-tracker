@@ -7,10 +7,5 @@
     "permissions": [
         "http://*/",
         "https://*/"
-    ],
-    "background": {
-        "scripts": [
-            "/js/service.js"
-        ]
-    }
+    ]
 }

@@ -58,7 +58,6 @@ function GetItemInfo(item, episode_regex) {
     }
 
     return {
-        watched: false,
         episode: episode,
         link: link,
         magnet: magnet,

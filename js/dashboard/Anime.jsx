@@ -20,7 +20,7 @@ var Anime = React.createClass({
             show_all: !show_all
         });
     },
-    componentDidMount: function () {
+    _retrieve: function () {
         var self = this;
         Tracker.Retrieve(this.props.name)
             .then(function (episodes) {
@@ -29,7 +29,15 @@ var Anime = React.createClass({
                     episodes: episodes,
                     show_all: false
                 });
-            });
+                return episodes.length > 0 ? episodes[0] : null;
+            }).done();
+    },
+    componentDidMount: function () {
+        this._retrieve();
+        setInterval(this._retrieve, 900000);
+    },
+    componentWillUnmount: function () {
+        clearInterval(this._retrieve);
     },
     render: function () {
         var self = this;
