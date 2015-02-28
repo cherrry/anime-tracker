@@ -67,8 +67,11 @@ function Initialize_Anime(anime_name) {
 
                 if (latestPublishTime > storedPublishTime) {
 
-                    // TODO: send notification
+                    // TODO: send a better notification
                     console.log("updated", anime_name);
+                    new Notification(anime_name, {
+                        body: "Updated!!!!!"
+                    });
 
                     chrome.runtime.sendMessage({
                         type: "anime-update",
