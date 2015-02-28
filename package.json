@@ -1,8 +1,15 @@
 {
     "name": "anime-tracker",
+    "version": "0.0.1",
     "description": "Track latest episode of various animes.",
-    "isPrivate": true,
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/cherrry/anime-tracker.git"
+    },
+    "private": true,
     "dependencies": {
+        "jquery": "~>2.1.0",
+        "q": "~>1.2.0",
         "react": "~>0.12.0"
     },
     "devDependencies": {

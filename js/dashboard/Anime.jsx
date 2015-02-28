@@ -2,7 +2,7 @@
 
 var React = require("react");
 
-var AnimeTracker = require("./../AnimeTracker.js");
+var Tracker = require("./../tracker.js");
 var Episode = require("./Episode.jsx");
 var TableRowFiller = require("./TableRowFiller.jsx");
 
@@ -14,27 +14,30 @@ var Anime = React.createClass({
             show_all: false
         };
     },
-    _animeRetrievedCallback: function (response) {
-        if (response.response === "ok") {
-            this.setState({
-                is_loaded: true,
-                episodes: response.data,
-                show_all: response.show_all
-            });
-        }
-    },
-    _reload: function (event) {
+    _toggleShowAll: function (event) {
+        var show_all = this.state.show_all;
         this.setState({
-            is_loaded: false
+            show_all: !show_all
         });
-        AnimeTracker.retrieve_all(this.props.name, this._animeRetrievedCallback);
     },
     componentDidMount: function () {
-        AnimeTracker.retrieve(this.props.name, this._animeRetrievedCallback);
+        var self = this;
+        Tracker.Retrieve(this.props.name)
+            .then(function (episodes) {
+                self.setState({
+                    is_loaded: true,
+                    episodes: episodes,
+                    show_all: false
+                });
+            });
     },
     render: function () {
         var self = this;
-        var Episodes = this.state.episodes.map(function (episode) {
+
+        var limit = this.state.show_all ? -1 : 4;
+        var episodes = this.state.episodes.slice(0, limit);
+
+        var Episodes = episodes.map(function (episode) {
             var key = self.props.name + '-episode-' + episode.episode;
             return <Episode name={ self.props.name } episode={ episode } key={ key } />
         });
@@ -44,44 +47,46 @@ var Anime = React.createClass({
             Episodes.push(<TableRowFiller cols="3" content="Not Available" key={ key } />);
         }
 
-        var MoreButton = null;
-        if (!this.state.show_all) {
-            MoreButton = (
-                <div className="ui one column centered grid anime-more">
-                    <div className="ui button" onClick={ this._reload }>
-                        <i className="plus icon"></i>
-                        More
-                    </div>
+        var ToggleButton = null;
+        if (this.state.show_all) {
+            ToggleButton = (
+                <div className="ui button" onClick={ this._toggleShowAll }>
+                    <i className="minus icon"></i>
+                    Less
+                </div>
+            );
+        } else {
+            ToggleButton = (
+                <div className="ui button" onClick={ this._toggleShowAll }>
+                    <i className="plus icon"></i>
+                    More
                 </div>
             );
         }
 
-        var dimmer = null;
+        var Dimmer = null;
         if (!this.state.is_loaded) {
-            dimmer = <tbody className="ui active inverted dimmer anime-dimmer"></tbody>;
-            MoreButton = (
-                <div className="ui one column centered grid anime-more">
-                    <div className="ui loading button">Loading</div>
-                </div>
-            );
+            Dimmer = <tbody className="ui active inverted dimmer anime-dimmer"></tbody>;
         }
 
-        var floating = null;
+        var EpisodeCount = null;
         if ( this.state.episodes.length > 0 )
         {
-            floating = <div className="floating ui yellow circular label">{ this.state.episodes[0].episode }</div>
+            EpisodeCount = <div className="floating ui yellow circular label">{ this.state.episodes[0].episode }</div>
         }
 
         return (
             <div className="column">
                 <div className="ui segment">
                     <span className="ui green ribbon label anime-name">{ this.props.name }</span>
-                        { floating }
-                        <table className="ui table">
-                            { dimmer }
-                            <tbody>{ Episodes }</tbody>
-                        </table>
-                        { MoreButton }
+                    { EpisodeCount }
+                    <table className="ui table">
+                        { Dimmer }
+                        <tbody>{ Episodes }</tbody>
+                    </table>
+                    <div className="ui one column centered grid anime-more">
+                        { ToggleButton }
+                    </div>
                 </div>
             </div>
         );

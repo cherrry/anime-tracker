@@ -4,21 +4,11 @@ var React = require("react");
 var moment = require("moment");
 
 var Episode = React.createClass({
-    _download: function (event) {
-        var magnet = this.props.episode.magnet;
-        console.log('send download request', magnet);
-        chrome.runtime.sendMessage({
-            type: "download",
-            magnet: magnet
-        }, function (response) {
-            console.log(response);
-        });
-    },
     render: function () {
         var episode = this.props.episode;
 
         var additionalStyle = "";
-        if (moment(episode.publish).isAfter(moment().subtract(7, 'day'))) {
+        if (moment(episode.publish).isAfter(moment().subtract(3, 'day'))) {
             additionalStyle = " warning"
         }
 
@@ -33,7 +23,7 @@ var Episode = React.createClass({
                     </div>
                 </td>
                 <td className="collapsing center aligned">
-                    <a className="episode-download" onClick={ this._download }>
+                    <a className="episode-download" href={ episode.magnet }>
                         <i className="download icon"></i>
                     </a>
                 </td>
