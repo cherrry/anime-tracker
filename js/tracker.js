@@ -50,7 +50,7 @@ function GetItemInfo(item, episode_regex) {
     var title = item.find("title").text();
     var link = item.find("link").text();
     var magnet = item.find("enclosure").attr("url");
-    var publish = moment(new Date(item.find("pubDate").text()));
+    var publish = +moment(new Date(item.find("pubDate").text())).utc();
 
     var episode = "N/A";
     if (match = episode_regex.exec(title)) {

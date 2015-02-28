@@ -2,7 +2,6 @@
 
 var React = require("react");
 
-var Tracker = require("./../tracker.js");
 var Episode = require("./Episode.jsx");
 var TableRowFiller = require("./TableRowFiller.jsx");
 
@@ -20,24 +19,24 @@ var Anime = React.createClass({
             show_all: !show_all
         });
     },
-    _retrieve: function () {
-        var self = this;
-        Tracker.Retrieve(this.props.name)
-            .then(function (episodes) {
-                self.setState({
-                    is_loaded: true,
-                    episodes: episodes,
-                    show_all: false
-                });
-                return episodes.length > 0 ? episodes[0] : null;
-            }).done();
+    _onAnimeUpdate: function (message) {
+        if ((message.type !== "anime-update" && message.type !== "anime-init:response") || message.anime !== this.props.name) {
+            return;
+        }
+        this.setState({
+            is_loaded: true,
+            episodes: message.episodes,
+        });
     },
     componentDidMount: function () {
-        this._retrieve();
-        setInterval(this._retrieve, 900000);
+        chrome.runtime.onMessage.addListener(this._onAnimeUpdate);
+        chrome.runtime.sendMessage({
+            type: "anime-init:request",
+            anime: this.props.name
+        });
     },
     componentWillUnmount: function () {
-        clearInterval(this._retrieve);
+        chrome.runtime.onMessage.removeListener(this._onAnimeUpdate);
     },
     render: function () {
         var self = this;

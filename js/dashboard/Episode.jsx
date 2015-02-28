@@ -6,9 +6,10 @@ var moment = require("moment");
 var Episode = React.createClass({
     render: function () {
         var episode = this.props.episode;
+        var publish = moment(episode.publish);
 
         var additionalStyle = "";
-        if (moment(episode.publish).isAfter(moment().subtract(3, 'day'))) {
+        if (publish.isAfter(moment().subtract(3, 'day'))) {
             additionalStyle = " warning"
         }
 
@@ -18,8 +19,8 @@ var Episode = React.createClass({
                     <a href={ episode.link } target="_blank">{ this.props.name } { episode.episode }</a>
                 </td>
                 <td className="collapsing right aligned">
-                    <div className="datetime" title={ episode.publish.format("YYYY-MM-DD HH:mm") }>
-                        { episode.publish.fromNow() }
+                    <div className="datetime" title={ publish.format("YYYY-MM-DD HH:mm") }>
+                        { publish.fromNow() }
                     </div>
                 </td>
                 <td className="collapsing center aligned">

@@ -6,6 +6,12 @@
     "options_page": "/dashboard.html",
     "permissions": [
         "http://*/",
-        "https://*/"
-    ]
+        "https://*/",
+        "storage"
+    ],
+    "background": {
+        "scripts": [
+            "/js/service.js"
+        ]
+    }
 }
