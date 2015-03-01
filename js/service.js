@@ -88,7 +88,7 @@ function Initialize_Anime(anime_name) {
             // TODO: determine the next update time in a clever way
             setTimeout(function () {
                 Initialize_Anime(anime_name);
-            }, 90000); // 15-mins
+            }, 900000); // 15-mins
         }).done();
 }
 Initialize();
