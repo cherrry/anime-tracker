@@ -7,6 +7,8 @@ var sources = require("./tracker/sources.js");
 var Tracker = require("./tracker.js");
 var AnimeCache = require("./service/anime-cache.js");
 
+require("./service/notification.js");
+
 chrome.runtime.onMessage.addListener(onAnimeInit);
 
 function onAnimeInit(message) {
@@ -39,6 +41,11 @@ function RetrieveAnime(anime, useCache) {
         .then(function (episodes) {
             AnimeCache.SetEpisodes(anime, episodes);
             defer.resolve(episodes);
+        }).catch(function () {
+            // Retry after 1-min
+            setTimeout(function () {
+                defer.resolve(RetrieveAnime(anime, useCache));
+            }, 60000);
         }).done();
 
     return defer.promise;
@@ -66,13 +73,6 @@ function Initialize_Anime(anime_name) {
                 var storedPublishTime = storage.latestPublish[anime_name];
 
                 if (latestPublishTime > storedPublishTime) {
-
-                    // TODO: send a better notification
-                    console.log("updated", anime_name);
-                    new Notification(anime_name, {
-                        body: "Updated!!!!!"
-                    });
-
                     chrome.runtime.sendMessage({
                         type: "anime-update",
                         anime: anime_name,
@@ -89,6 +89,12 @@ function Initialize_Anime(anime_name) {
             setTimeout(function () {
                 Initialize_Anime(anime_name);
             }, 900000); // 15-mins
+        }).catch(function () {
+            // retry after 1-min
+            setTimeout(function () {
+                Initialize_Anime(anime_name);
+            }, 60000);
         }).done();
 }
+
 Initialize();

@@ -12,7 +12,8 @@ var watchify = require("watchify");
 var watch = require("gulp-watch");
 
 var copy_list = [
-    "./manifest.json"
+    "./manifest.json",
+    "./images/**/*"
 ];
 
 var js_tasks = {
