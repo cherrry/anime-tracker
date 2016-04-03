@@ -8,9 +8,7 @@ var Dashboard = React.createClass({
     render: function () {
         var trackingAnimes = [
             "Pokemon XY",
-            "暗殺教室",
-            "Aldnoah Zero",
-            "東京喰種 √A"
+            "逆轉裁判"
         ];
         return (
             <div>

@@ -7,22 +7,10 @@ module.exports = {
         episode_regex: /第(.+)話/,
         weekday: 5
     },
-    "暗殺教室": {
+    "逆轉裁判": {
         rss_source: 'http://share.dmhy.org/topics/rss/rss.xml',
-        keyword: '豌豆字幕組 暗殺教室 BIG5',
-        episode_regex: /room\]\[(\d+)\]\[BIG5/,
-        weekday: 6
-    },
-    "Aldnoah Zero": {
-        rss_source: 'http://share.dmhy.org/topics/rss/rss.xml',
-        keyword: '諸神字幕組 Aldnoah Zero 1080P MKV',
-        episode_regex: /ro\]\[(.+)\]\[1080P/,
-        weekday: 0
-    },
-    "東京喰種 √A": {
-        rss_source: 'http://share.dmhy.org/topics/rss/rss.xml',
-        keyword: '極影字幕社 東京喰種 BIG5',
-        episode_regex: /A】 【(.+)】BIG5/,
-        weekday: 5
+        keyword: '澄空学园 逆转裁判',
+        episode_regex: /第(\d+)话/,
+        weekday: 1
     }
 };
